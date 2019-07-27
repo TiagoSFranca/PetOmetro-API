@@ -1,0 +1,24 @@
+﻿using PetOmetro.Domain.Domain;
+using System.Collections.Generic;
+
+namespace PetOmetro.Domain.Seeds
+{
+    public class GeneroPetSeed
+    {
+        public GeneroPetSeed()
+        {
+        }
+
+        public static GeneroPet Macho => new GeneroPet() { Id = 1, Descricao = "Macho" };
+        public static GeneroPet Femea => new GeneroPet() { Id = 2, Descricao = "Fêmea" };
+        public static GeneroPet Indeterminado => new GeneroPet() { Id = 3, Descricao = "Indeterminado" };
+
+        public static List<GeneroPet> Seeds => new List<GeneroPet>()
+        {
+            Macho,
+            Femea,
+            Indeterminado
+        };
+
+    }
+}
