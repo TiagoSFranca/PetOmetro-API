@@ -1,8 +1,9 @@
-﻿using System;
+﻿using PetOmetro.Application.GeneroPets.Models;
+using System;
 
-namespace PetOmetro.Domain.Domain
+namespace PetOmetro.Application.Pets.Models
 {
-    public class Pet
+    public class PetViewModel
     {
         public int Id { get; set; }
         public string Nome { get; set; }
@@ -14,7 +15,6 @@ namespace PetOmetro.Domain.Domain
         public string Comentário { get; set; }
         public string UrlImagem { get; set; }
 
-        public virtual GeneroPet GeneroPet { get; set; }
-
+        public virtual GeneroPetViewModel GeneroPet { get; set; }
     }
 }

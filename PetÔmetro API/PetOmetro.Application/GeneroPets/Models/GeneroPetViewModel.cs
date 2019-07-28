@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace PetOmetro.Application.GeneroPets.Models
+﻿namespace PetOmetro.Application.GeneroPets.Models
 {
     public class GeneroPetViewModel
     {
+        public int Id { get; set; }
+        public string Nome { get; set; }
     }
 }

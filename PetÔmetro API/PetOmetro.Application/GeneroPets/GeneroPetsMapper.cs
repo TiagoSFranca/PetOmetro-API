@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
+using PetOmetro.Application.GeneroPets.Models;
 using PetOmetro.Application.Settings.AutoMapper;
-using System;
+using PetOmetro.Domain.Domain;
 
 namespace PetOmetro.Application.GeneroPets
 {
@@ -13,7 +14,7 @@ namespace PetOmetro.Application.GeneroPets
 
         protected override void Map(Profile profile)
         {
-            throw new NotImplementedException();
+            profile.CreateMap<GeneroPet, GeneroPetViewModel>();
         }
     }
 }

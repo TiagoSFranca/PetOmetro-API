@@ -8,12 +8,14 @@ namespace PetOmetro.Persistence.EntityConfigurations
     {
         public void Configure(EntityTypeBuilder<GeneroPet> builder)
         {
+            builder.ToTable(nameof(GeneroPet));
+
             builder.HasKey(e => e.Id);
 
             builder.Property(e => e.Id)
                 .ValueGeneratedNever();
 
-            builder.Property(e => e.Descricao)
+            builder.Property(e => e.Nome)
                 .IsRequired()
                 .HasMaxLength(32);
         }

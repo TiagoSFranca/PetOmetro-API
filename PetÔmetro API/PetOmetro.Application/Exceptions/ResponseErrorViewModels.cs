@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace PetOmetro.Application.Exceptions
 {
-    public class ResponseErrorViewModel
+    public class ResponseError
     {
-        public ResponseErrorViewModel(Exception exception)
+        public ResponseError(Exception exception)
         {
             Message = exception.Message;
 
@@ -14,16 +14,16 @@ namespace PetOmetro.Application.Exceptions
         public string Message { get; private set; }
     }
 
-    public class ResponseNotFoundViewModel : ResponseErrorViewModel
+    public class ResponseNotFound : ResponseError
     {
-        public ResponseNotFoundViewModel(Exception exception) : base(exception)
+        public ResponseNotFound(Exception exception) : base(exception)
         {
         }
     }
 
-    public class ResponseBadRequestViewModel : ResponseErrorViewModel
+    public class ResponseBadRequest : ResponseError
     {
-        public ResponseBadRequestViewModel(Exception exception) : base(exception)
+        public ResponseBadRequest(Exception exception) : base(exception)
         {
             StackTrace = exception.StackTrace;
             if (exception is ValidationException validationException)
@@ -34,9 +34,9 @@ namespace PetOmetro.Application.Exceptions
         public IDictionary<string, string[]> Failures { get; private set; }
     }
 
-    public class ResponseInternalServerErrorViewModel : ResponseErrorViewModel
+    public class ResponseInternalServerError : ResponseError
     {
-        public ResponseInternalServerErrorViewModel(Exception exception) : base(exception)
+        public ResponseInternalServerError(Exception exception) : base(exception)
         {
             StackTrace = exception.StackTrace;
         }

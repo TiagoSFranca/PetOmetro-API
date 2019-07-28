@@ -11,7 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="GeneroPets\Queries\" />
+    <ProjectReference Include="..\PetOmetro.Domain\PetOmetro.Domain.csproj" />
+    <ProjectReference Include="..\PetOmetro.Persistence\PetOmetro.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

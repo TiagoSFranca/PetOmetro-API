@@ -9,9 +9,9 @@ namespace PetOmetro.Domain.Seeds
         {
         }
 
-        public static GeneroPet Macho => new GeneroPet() { Id = 1, Descricao = "Macho" };
-        public static GeneroPet Femea => new GeneroPet() { Id = 2, Descricao = "Fêmea" };
-        public static GeneroPet Indeterminado => new GeneroPet() { Id = 3, Descricao = "Indeterminado" };
+        public static GeneroPet Macho => new GeneroPet() { Id = 1, Nome = "Macho" };
+        public static GeneroPet Femea => new GeneroPet() { Id = 2, Nome = "Fêmea" };
+        public static GeneroPet Indeterminado => new GeneroPet() { Id = 3, Nome = "Indeterminado" };
 
         public static List<GeneroPet> Seeds => new List<GeneroPet>()
         {

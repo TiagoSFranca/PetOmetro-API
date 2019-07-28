@@ -1,4 +1,6 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using FluentValidation.AspNetCore;
+using MediatR;
 using MediatR.Pipeline;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -7,10 +9,13 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PetOmetro.API.Filters;
+using PetOmetro.Application.GeneroPets.Queries.GetGeneroPets;
 using PetOmetro.Application.Settings;
+using PetOmetro.Application.Settings.AutoMapper;
 using PetOmetro.Application.Settings.Models;
 using PetOmetro.Persistence;
 using Swashbuckle.AspNetCore.Swagger;
+using System.Reflection;
 
 namespace PetOmetro.API
 {
@@ -37,7 +42,7 @@ namespace PetOmetro.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddAutoMapper(new Assembly[] { typeof(AutoMapperProfile).GetTypeInfo().Assembly });
+            services.AddAutoMapper(new Assembly[] { typeof(AutoMapperProfile).GetTypeInfo().Assembly });
 
             #region Dependency Injections
 
@@ -47,14 +52,14 @@ namespace PetOmetro.API
 
             #endregion
 
-            //services.AddMediatR(typeof(GetGenerosMusicaisQuery).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(GetGeneroPetsQuery).GetTypeInfo().Assembly);
 
             services.AddCors();
 
             services
                 .AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-            //.AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<VenderDiscosCommandValidator>());
+                .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetGeneroPetsQuery>());
 
             services.AddDbContext<PetOmetroContext>(options =>
                 options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("PetOmetroConnection")));

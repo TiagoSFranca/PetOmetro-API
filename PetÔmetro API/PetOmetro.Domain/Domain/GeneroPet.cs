@@ -10,7 +10,7 @@ namespace PetOmetro.Domain.Domain
         }
 
         public int Id { get; set; }
-        public string Descricao { get; set; }
+        public string Nome { get; set; }
 
         public virtual ICollection<Pet> Pets { get; set; }
     }
