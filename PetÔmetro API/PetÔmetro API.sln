@@ -11,13 +11,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetOmetro.Domain", "PetOmet
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2 - Infra", "2 - Infra", "{C3FC61CA-840B-497A-88F6-2F815E3D5136}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetOmetro.Persistence", "PetOmetro.Persistence\PetOmetro.Persistence.csproj", "{C2CDBF76-0AE6-4EFE-9C12-49905027B3E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetOmetro.Persistence", "PetOmetro.Persistence\PetOmetro.Persistence.csproj", "{C2CDBF76-0AE6-4EFE-9C12-49905027B3E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetOmetro.Application", "PetOmetro.Application\PetOmetro.Application.csproj", "{886DADD8-3201-441E-AA2A-6CEC33BE955C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetOmetro.Application", "PetOmetro.Application\PetOmetro.Application.csproj", "{886DADD8-3201-441E-AA2A-6CEC33BE955C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0 - Presentation", "0 - Presentation", "{58BE1108-ED71-45F7-B18C-910D462210E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetOmetro.API", "PetOmetro.API\PetOmetro.API.csproj", "{8CAF8264-FEF2-440D-A890-30FD3B9073DA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetOmetro.API", "PetOmetro.API\PetOmetro.API.csproj", "{8CAF8264-FEF2-440D-A890-30FD3B9073DA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3 - Common", "3 - Common", "{9EE6CFE8-F8F0-4B1B-AB37-7560A12B677E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetOmetro.Common", "PetOmetro.Common\PetOmetro.Common.csproj", "{A7E18084-9A28-443F-B884-A8F4A6C708F2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -41,6 +45,10 @@ Global
 		{8CAF8264-FEF2-440D-A890-30FD3B9073DA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8CAF8264-FEF2-440D-A890-30FD3B9073DA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8CAF8264-FEF2-440D-A890-30FD3B9073DA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7E18084-9A28-443F-B884-A8F4A6C708F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7E18084-9A28-443F-B884-A8F4A6C708F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7E18084-9A28-443F-B884-A8F4A6C708F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7E18084-9A28-443F-B884-A8F4A6C708F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,6 +61,8 @@ Global
 		{886DADD8-3201-441E-AA2A-6CEC33BE955C} = {6E239560-4BB8-44A5-8D0A-B4A4CBEEAFBE}
 		{58BE1108-ED71-45F7-B18C-910D462210E0} = {C6C7D079-E752-4D2C-90DC-ADB369E4EA4A}
 		{8CAF8264-FEF2-440D-A890-30FD3B9073DA} = {58BE1108-ED71-45F7-B18C-910D462210E0}
+		{9EE6CFE8-F8F0-4B1B-AB37-7560A12B677E} = {C6C7D079-E752-4D2C-90DC-ADB369E4EA4A}
+		{A7E18084-9A28-443F-B884-A8F4A6C708F2} = {9EE6CFE8-F8F0-4B1B-AB37-7560A12B677E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {03A2F807-5923-486F-AA1D-79059F474794}

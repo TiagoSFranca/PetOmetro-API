@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\PetOmetro.Common\PetOmetro.Common.csproj" />
     <ProjectReference Include="..\PetOmetro.Domain\PetOmetro.Domain.csproj" />
     <ProjectReference Include="..\PetOmetro.Persistence\PetOmetro.Persistence.csproj" />
   </ItemGroup>

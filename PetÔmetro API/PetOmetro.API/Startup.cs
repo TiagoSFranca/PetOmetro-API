@@ -9,7 +9,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using PetOmetro.API.Filters;
+using PetOmetro.Application.BaseApplications;
 using PetOmetro.Application.GeneroPets.Queries.GetGeneroPets;
+using PetOmetro.Application.Interfaces.BaseApplications;
 using PetOmetro.Application.Settings;
 using PetOmetro.Application.Settings.AutoMapper;
 using PetOmetro.Application.Settings.Models;
@@ -46,7 +48,7 @@ namespace PetOmetro.API
 
             #region Dependency Injections
 
-            //services.TryAddTransient<ISpotifyService, SpotifyService>();
+            services.AddTransient(typeof(IPaginacaoBaseApplication<,>), typeof(PaginacaoBaseApplication<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPreProcessorBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
 
