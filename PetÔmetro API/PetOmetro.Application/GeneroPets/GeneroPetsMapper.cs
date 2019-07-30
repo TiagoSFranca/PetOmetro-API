@@ -1,15 +1,15 @@
 ﻿using AutoMapper;
 using PetOmetro.Application.GeneroPets.Models;
 using PetOmetro.Application.Settings.AutoMapper;
-using PetOmetro.Domain.Domain;
+using PetOmetro.Domain.Entities;
 
 namespace PetOmetro.Application.GeneroPets
 {
     public class GeneroPetsMapper : BaseMapper
     {
         public GeneroPetsMapper(Profile profile)
+            : base(profile)
         {
-            Map(profile);
         }
 
         protected override void Map(Profile profile)

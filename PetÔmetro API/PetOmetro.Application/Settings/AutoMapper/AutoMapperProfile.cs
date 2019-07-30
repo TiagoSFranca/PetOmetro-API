@@ -9,6 +9,8 @@ namespace PetOmetro.Application.Settings.AutoMapper
     {
         public AutoMapperProfile()
         {
+            CreateMap<string, string>().ConvertUsing(str => str == null ? null : str.Trim());
+
             Assembly assembly = Assembly.GetAssembly(typeof(AutoMapperProfile));
 
             var types = assembly.GetTypes().Where(x => x.IsClass && !x.IsAbstract && x.IsSubclassOf(typeof(BaseMapper))).ToList();

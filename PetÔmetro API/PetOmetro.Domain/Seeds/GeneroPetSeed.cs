@@ -1,4 +1,4 @@
-﻿using PetOmetro.Domain.Domain;
+﻿using PetOmetro.Domain.Entities;
 using System.Collections.Generic;
 
 namespace PetOmetro.Domain.Seeds

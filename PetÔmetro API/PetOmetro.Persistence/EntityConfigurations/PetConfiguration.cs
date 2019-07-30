@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using PetOmetro.Domain.Domain;
+using PetOmetro.Domain.Entities;
 
 namespace PetOmetro.Persistence.EntityConfigurations
 {
@@ -34,6 +34,10 @@ namespace PetOmetro.Persistence.EntityConfigurations
             builder.HasOne(e => e.GeneroPet)
                 .WithMany(p => p.Pets)
                 .HasForeignKey(e => e.IdGeneroPet);
+
+            builder.HasOne(e => e.Usuario)
+                .WithMany(p => p.Pets)
+                .HasForeignKey(e => e.IdUsuario);
         }
     }
 }

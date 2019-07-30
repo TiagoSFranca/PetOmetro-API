@@ -3,7 +3,7 @@ using MediatR;
 using PetOmetro.Application.Interfaces.BaseApplications;
 using PetOmetro.Application.Paginacoes.Models;
 using PetOmetro.Application.Pets.Models;
-using PetOmetro.Domain.Domain;
+using PetOmetro.Domain.Entities;
 using PetOmetro.Persistence;
 using System;
 using System.Collections.Generic;

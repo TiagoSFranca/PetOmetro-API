@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PetOmetro.Domain.Domain
+namespace PetOmetro.Domain.Entities
 {
     public class GeneroPet
     {

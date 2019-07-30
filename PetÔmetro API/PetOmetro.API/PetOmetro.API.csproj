@@ -16,6 +16,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PetOmetro.Application\PetOmetro.Application.csproj" />
+    <ProjectReference Include="..\PetOmetro.Infrastructure\PetOmetro.Infrastructure.csproj" />
     <ProjectReference Include="..\PetOmetro.Persistence\PetOmetro.Persistence.csproj" />
   </ItemGroup>
 

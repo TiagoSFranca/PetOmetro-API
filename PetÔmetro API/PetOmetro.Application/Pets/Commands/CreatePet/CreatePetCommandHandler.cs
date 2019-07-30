@@ -2,7 +2,7 @@
 using MediatR;
 using PetOmetro.Application.Exceptions;
 using PetOmetro.Application.Pets.Models;
-using PetOmetro.Domain.Domain;
+using PetOmetro.Domain.Entities;
 using PetOmetro.Persistence;
 using System;
 using System.Threading;

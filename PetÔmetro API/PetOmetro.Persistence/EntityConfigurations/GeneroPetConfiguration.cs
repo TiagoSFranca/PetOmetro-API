@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using PetOmetro.Domain.Domain;
+using PetOmetro.Domain.Entities;
 
 namespace PetOmetro.Persistence.EntityConfigurations
 {

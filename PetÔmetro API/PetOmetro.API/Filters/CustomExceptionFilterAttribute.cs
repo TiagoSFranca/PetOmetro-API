@@ -35,6 +35,12 @@ namespace PetOmetro.API.Filters
             MontarResponse(ref context, (int)HttpStatusCode.InternalServerError, objeto);
         }
 
+        private void MontarUnauthorized(ref ExceptionContext context)
+        {
+            var objeto = new ResponseUnauthorized(context.Exception);
+            MontarResponse(ref context, (int)HttpStatusCode.Unauthorized, objeto);
+        }
+
         public override void OnException(ExceptionContext context)
         {
             if (context.Exception is ValidationException || context.Exception is BusinessException)
@@ -44,6 +50,10 @@ namespace PetOmetro.API.Filters
             else if (context.Exception is NotFoundException)
             {
                 MontarNotFound(ref context);
+            }
+            else if (context.Exception is AuthorizationException)
+            {
+                MontarUnauthorized(ref context);
             }
             else if (context.Exception is PersistenceException)
             {

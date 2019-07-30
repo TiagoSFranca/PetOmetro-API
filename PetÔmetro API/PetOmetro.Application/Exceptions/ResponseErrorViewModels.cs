@@ -43,4 +43,11 @@ namespace PetOmetro.Application.Exceptions
 
         public string StackTrace { get; private set; }
     }
+
+    public class ResponseUnauthorized : ResponseError
+    {
+        public ResponseUnauthorized(Exception exception) : base(exception)
+        {
+        }
+    }
 }

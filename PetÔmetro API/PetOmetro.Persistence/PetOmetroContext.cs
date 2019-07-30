@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using PetOmetro.Domain.Domain;
+using PetOmetro.Domain.Entities;
 
 namespace PetOmetro.Persistence
 {
@@ -14,6 +14,8 @@ namespace PetOmetro.Persistence
 
         public DbSet<GeneroPet> GeneroPets { get; set; }
         public DbSet<Pet> Pets { get; set; }
+        public DbSet<Usuario> Usuarios { get; set; }
+        public DbSet<PetUsuario> PetUsuarios { get; set; }
 
         #endregion
 

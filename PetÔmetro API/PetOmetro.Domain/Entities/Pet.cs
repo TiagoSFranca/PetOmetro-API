@@ -1,20 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace PetOmetro.Domain.Domain
+namespace PetOmetro.Domain.Entities
 {
     public class Pet
     {
+        public Pet()
+        {
+            PetUsuarios = new HashSet<PetUsuario>();
+        }
+
         public int Id { get; set; }
         public string Nome { get; set; }
         public string Especie { get; set; }
         public string Raca { get; set; }
         public DateTime? DtNascimento { get; set; }
-        public int IdGeneroPet { get; set; }
-
         public string Comentário { get; set; }
         public string UrlImagem { get; set; }
 
-        public virtual GeneroPet GeneroPet { get; set; }
+        public int IdGeneroPet { get; set; }
+        public int IdUsuario { get; set; }
 
+        public virtual GeneroPet GeneroPet { get; set; }
+        public virtual Usuario Usuario { get; set; }
+
+        public virtual ICollection<PetUsuario> PetUsuarios { get; set; }
     }
 }
