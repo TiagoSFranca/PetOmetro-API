@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PetOmetro.Application.Exceptions;
 using PetOmetro.Application.Paginacoes.Models;
 using PetOmetro.Application.Pets.Commands.CreatePet;
@@ -13,9 +14,11 @@ namespace PetOmetro.API.Controllers
     public class PetsController : BaseController
     {
         [HttpPost]
+        [Authorize]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(PetViewModel))]
         [ProducesResponseType((int)HttpStatusCode.NotFound, Type = typeof(ResponseNotFound))]
         [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ResponseBadRequest))]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(ResponseUnauthorized))]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError, Type = typeof(ResponseInternalServerError))]
         public async Task<ActionResult<PetViewModel>> Create(CreatePet model)
         {
