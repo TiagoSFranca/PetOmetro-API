@@ -16,6 +16,7 @@ namespace PetOmetro.Application.Pets
         protected override void Map(Profile profile)
         {
             profile.CreateMap<Pet, PetViewModel>();
+            profile.CreateMap<Pet, PetItemViewModel>();
             profile.CreateMap<CreatePetCommand, Pet>();
             profile.CreateMap<CreatePet, CreatePetCommand>();
         }

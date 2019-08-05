@@ -14,13 +14,22 @@ namespace PetOmetro.Persistence
         private void Seed(PetOmetroContext context)
         {
             SeedGeneroPet(context);
+            SeedSituacaoSolicitacaoPet(context);
+        }
+
+        private void SeedSituacaoSolicitacaoPet(PetOmetroContext context)
+        {
+            if (context.SituacoesSolicitacaoPet.Any())
+                return;
+            context.SituacoesSolicitacaoPet.AddRange(SituacaoSolicitacaoPetSeed.Seeds);
+            context.SaveChanges();
         }
 
         private void SeedGeneroPet(PetOmetroContext context)
         {
-            if (context.GeneroPets.Any())
+            if (context.GenerosPet.Any())
                 return;
-            context.GeneroPets.AddRange(GeneroPetSeed.Seeds);
+            context.GenerosPet.AddRange(GeneroPetSeed.Seeds);
             context.SaveChanges();
         }
     }

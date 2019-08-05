@@ -28,7 +28,7 @@ namespace PetOmetro.Application.Pets.Commands.CreatePet
         {
             var idUsuario = _authBaseApplication.GetIdUsuario();
 
-            var genero = await _context.GeneroPets.FindAsync(request.IdGeneroPet);
+            var genero = await _context.GenerosPet.FindAsync(request.IdGeneroPet);
             if (genero == null)
                 throw new NotFoundException("Gênero Pet", request.IdGeneroPet);
 

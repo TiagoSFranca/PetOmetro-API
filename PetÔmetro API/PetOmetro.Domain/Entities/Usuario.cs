@@ -8,6 +8,8 @@ namespace PetOmetro.Domain.Entities
         {
             Pets = new HashSet<Pet>();
             PetUsuarios = new HashSet<PetUsuario>();
+            SolicitacoesPetSolicitado = new HashSet<SolicitacaoPet>();
+            SolicitacoesPetSolicitante = new HashSet<SolicitacaoPet>();
         }
 
         public int Id { get; set; }
@@ -19,5 +21,7 @@ namespace PetOmetro.Domain.Entities
 
         public virtual ICollection<Pet> Pets { get; set; }
         public virtual ICollection<PetUsuario> PetUsuarios { get; set; }
+        public virtual ICollection<SolicitacaoPet> SolicitacoesPetSolicitado { get; set; }
+        public virtual ICollection<SolicitacaoPet> SolicitacoesPetSolicitante { get; set; }
     }
 }

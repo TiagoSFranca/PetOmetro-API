@@ -1,13 +1,13 @@
 ﻿using AutoMapper;
-using PetOmetro.Application.GeneroPets.Models;
+using PetOmetro.Application.GenerosPet.Models;
 using PetOmetro.Application.Settings.AutoMapper;
 using PetOmetro.Domain.Entities;
 
-namespace PetOmetro.Application.GeneroPets
+namespace PetOmetro.Application.GenerosPet
 {
-    public class GeneroPetsMapper : BaseMapper
+    public class GenerosPetMapper : BaseMapper
     {
-        public GeneroPetsMapper(Profile profile)
+        public GenerosPetMapper(Profile profile)
             : base(profile)
         {
         }

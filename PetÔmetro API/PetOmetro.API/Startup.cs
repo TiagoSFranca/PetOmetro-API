@@ -14,7 +14,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using PetOmetro.API.Filters;
 using PetOmetro.Application.BaseApplications;
-using PetOmetro.Application.GeneroPets.Queries.GetGeneroPets;
+using PetOmetro.Application.GenerosPet.Queries.GetGeneroPets;
 using PetOmetro.Application.Interfaces.BaseApplications;
 using PetOmetro.Application.Interfaces.Services;
 using PetOmetro.Application.Settings;
@@ -66,14 +66,14 @@ namespace PetOmetro.API
 
             #endregion
 
-            services.AddMediatR(typeof(GetGeneroPetsQuery).GetTypeInfo().Assembly);
+            services.AddMediatR(typeof(GetGenerosPetQuery).GetTypeInfo().Assembly);
 
             services.AddCors();
 
             services
                 .AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
-                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetGeneroPetsQuery>());
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetGenerosPetQuery>());
 
             services.AddDbContext<PetOmetroContext>(options =>
                 options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("PetOmetroConnection")));

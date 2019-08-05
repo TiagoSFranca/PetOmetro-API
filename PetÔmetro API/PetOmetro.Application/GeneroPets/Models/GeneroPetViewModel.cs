@@ -1,4 +1,4 @@
-﻿namespace PetOmetro.Application.GeneroPets.Models
+﻿namespace PetOmetro.Application.GenerosPet.Models
 {
     public class GeneroPetViewModel
     {

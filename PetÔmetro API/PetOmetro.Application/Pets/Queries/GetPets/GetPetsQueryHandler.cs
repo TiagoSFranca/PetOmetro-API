@@ -1,11 +1,9 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using PetOmetro.Application.Interfaces.BaseApplications;
 using PetOmetro.Application.Paginacoes.Models;
 using PetOmetro.Application.Pets.Models;
 using PetOmetro.Domain.Entities;
 using PetOmetro.Persistence;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -16,13 +14,11 @@ namespace PetOmetro.Application.Pets.Queries.GetPets
     public class GetPetsQueryHandler : IRequestHandler<GetPetsQuery, ConsultaPaginadaViewModel<PetViewModel>>
     {
         private readonly PetOmetroContext _context;
-        private readonly IMapper _mapper;
         private readonly IPaginacaoBaseApplication<Pet, PetViewModel> _paginacaoBaseApplication;
 
-        public GetPetsQueryHandler(PetOmetroContext context, IMapper mapper, IPaginacaoBaseApplication<Pet, PetViewModel> paginacaoBaseApplication)
+        public GetPetsQueryHandler(PetOmetroContext context, IPaginacaoBaseApplication<Pet, PetViewModel> paginacaoBaseApplication)
         {
             _context = context;
-            _mapper = mapper;
             _paginacaoBaseApplication = paginacaoBaseApplication;
         }
 
