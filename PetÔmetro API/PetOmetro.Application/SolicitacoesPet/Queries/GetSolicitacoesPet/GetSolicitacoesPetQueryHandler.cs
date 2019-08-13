@@ -17,9 +17,18 @@ namespace PetOmetro.Application.SolicitacoesPet.Queries.GetSolicitacoesPet
         private readonly IPaginacaoBaseApplication<SolicitacaoPet, SolicitacaoPetViewModel> _paginacaoBaseApplication;
         private readonly IAuthBaseApplication _authBaseApplication;
 
+        public GetSolicitacoesPetQueryHandler(PetOmetroContext context, IPaginacaoBaseApplication<SolicitacaoPet, SolicitacaoPetViewModel> paginacaoBaseApplication,
+            IAuthBaseApplication authBaseApplication)
+        {
+            _context = context;
+            _paginacaoBaseApplication = paginacaoBaseApplication;
+            _authBaseApplication = authBaseApplication;
+        }
+
         public async Task<ConsultaPaginadaViewModel<SolicitacaoPetViewModel>> Handle(GetSolicitacoesPetQuery request, CancellationToken cancellationToken)
         {
-            var idUsuario = _authBaseApplication.GetIdUsuario();
+            var usuario = await _authBaseApplication.GetUsuarioLogado();
+            var idUsuario = usuario.Id;
 
             var query = _context.SolicitacoesPet.AsQueryable();
 

@@ -26,7 +26,8 @@ namespace PetOmetro.Application.Pets.Commands.CreatePet
 
         public async Task<PetViewModel> Handle(CreatePetCommand request, CancellationToken cancellationToken)
         {
-            var idUsuario = _authBaseApplication.GetIdUsuario();
+            var usuario = await _authBaseApplication.GetUsuarioLogado();
+            var idUsuario = usuario.Id;
 
             var genero = await _context.GenerosPet.FindAsync(request.IdGeneroPet);
             if (genero == null)

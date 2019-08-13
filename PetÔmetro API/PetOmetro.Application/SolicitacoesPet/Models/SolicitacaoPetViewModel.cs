@@ -17,9 +17,9 @@ namespace PetOmetro.Application.SolicitacoesPet.Models
         public DateTime DataSolicitacao { get; set; }
         public DateTime? DataFinalizacao { get; set; }
 
-        public virtual UsuarioItemViewModel UsuarioSolicitante { get; set; }
-        public virtual UsuarioItemViewModel UsuarioSolicitado { get; set; }
-        public virtual PetItemViewModel Pet { get; set; }
-        public virtual SituacaoSolicitacaoPetViewModel SituacaoSolicitacao { get; set; }
+        public UsuarioItemViewModel UsuarioSolicitante { get; set; }
+        public UsuarioItemViewModel UsuarioSolicitado { get; set; }
+        public PetItemViewModel Pet { get; set; }
+        public SituacaoSolicitacaoPetViewModel SituacaoSolicitacao { get; set; }
     }
 }

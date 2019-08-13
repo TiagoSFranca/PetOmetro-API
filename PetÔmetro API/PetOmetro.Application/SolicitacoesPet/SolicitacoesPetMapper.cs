@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using PetOmetro.Application.Settings.AutoMapper;
+using PetOmetro.Application.SolicitacoesPet.Command.CreateSolicitacaoPet;
 using PetOmetro.Application.SolicitacoesPet.Models;
 using PetOmetro.Domain.Entities;
 
@@ -14,6 +15,8 @@ namespace PetOmetro.Application.SolicitacoesPet
         protected override void Map(Profile profile)
         {
             profile.CreateMap<SolicitacaoPet, SolicitacaoPetViewModel>();
+            profile.CreateMap<CreateSolicitacaoPet, CreateSolicitacaoPetCommand>();
+            profile.CreateMap<CreateSolicitacaoPetCommand, SolicitacaoPet>();
         }
     }
 }

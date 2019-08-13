@@ -1,7 +1,10 @@
-﻿namespace PetOmetro.Application.Interfaces.BaseApplications
+﻿using PetOmetro.Domain.Entities;
+using System.Threading.Tasks;
+
+namespace PetOmetro.Application.Interfaces.BaseApplications
 {
     public interface IAuthBaseApplication
     {
-        int GetIdUsuario();
+        Task<Usuario> GetUsuarioLogado();
     }
 }
