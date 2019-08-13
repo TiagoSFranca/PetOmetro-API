@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PetOmetro.Application.Exceptions;
 using PetOmetro.Application.Paginacoes.Models;
 using PetOmetro.Application.SolicitacoesPet.Command.CreateSolicitacaoPet;
+using PetOmetro.Application.SolicitacoesPet.Command.FinalizeSolicitacaoPet;
 using PetOmetro.Application.SolicitacoesPet.Models;
 using PetOmetro.Application.SolicitacoesPet.Queries.GetSolicitacaoPet;
 using PetOmetro.Application.SolicitacoesPet.Queries.GetSolicitacoesPet;
@@ -63,6 +64,20 @@ namespace PetOmetro.API.Controllers
             };
 
             return Ok(await Mediator.Send(query));
+        }
+
+        [HttpPost("Finalizar")]
+        [Authorize]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(SolicitacaoPetViewModel))]
+        [ProducesResponseType((int)HttpStatusCode.NotFound, Type = typeof(ResponseNotFound))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ResponseBadRequest))]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(ResponseUnauthorized))]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError, Type = typeof(ResponseInternalServerError))]
+        public async Task<ActionResult<SolicitacaoPetViewModel>> Finalize(FinalizeSolicitacaoPet model)
+        {
+            var command = Mapper.Map<FinalizeSolicitacaoPetCommand>(model);
+
+            return Ok(await Mediator.Send(command));
         }
     }
 }

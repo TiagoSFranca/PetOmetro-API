@@ -70,6 +70,7 @@ namespace PetOmetro.Application.SolicitacoesPet.Command.CreateSolicitacaoPet
             var entity = _mapper.Map<SolicitacaoPet>(request);
             entity.IdUsuarioSolicitante = idUsuario;
             entity.IdSituacaoSolicitacao = SituacaoSolicitacaoPetSeed.Pendente.Id;
+            entity.DataSolicitacao = DateTime.Now;
 
             try
             {
