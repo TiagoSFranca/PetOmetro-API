@@ -15,11 +15,14 @@ namespace PetOmetro.Application.Pets.Queries.GetPets
     {
         private readonly PetOmetroContext _context;
         private readonly IPaginacaoBaseApplication<Pet, PetViewModel> _paginacaoBaseApplication;
+        private readonly IAuthBaseApplication _authBaseApplication;
 
-        public GetPetsQueryHandler(PetOmetroContext context, IPaginacaoBaseApplication<Pet, PetViewModel> paginacaoBaseApplication)
+        public GetPetsQueryHandler(PetOmetroContext context, IPaginacaoBaseApplication<Pet, PetViewModel> paginacaoBaseApplication, 
+            IAuthBaseApplication authBaseApplication)
         {
             _context = context;
             _paginacaoBaseApplication = paginacaoBaseApplication;
+            _authBaseApplication = authBaseApplication;
         }
 
         public async Task<ConsultaPaginadaViewModel<PetViewModel>> Handle(GetPetsQuery request, CancellationToken cancellationToken)
@@ -40,6 +43,23 @@ namespace PetOmetro.Application.Pets.Queries.GetPets
 
             if (!string.IsNullOrEmpty(request.Raca))
                 query = query.Where(e => e.Raca.ToLower().Contains(request.Raca.ToLower()));
+
+            if (request.MeusPets)
+            {
+                var usuario = await _authBaseApplication.GetUsuarioLogado();
+                var idUsuario = usuario.Id;
+
+                if (request.Dono != null)
+                {
+                    query = query.Where(e => e.IdUsuario == idUsuario || e.PetUsuarios.Any(p => p.IdUsuario == idUsuario));
+
+                    if (request.Dono == true)
+                        query = query.Where(e => e.IdUsuario == idUsuario);
+                    else
+                        query = query.Where(e => e.PetUsuarios.Any(p => p.IdUsuario == idUsuario));
+
+                }
+            }
 
             var paginacao = request.Paginacao ?? new PaginacaoViewModel();
 

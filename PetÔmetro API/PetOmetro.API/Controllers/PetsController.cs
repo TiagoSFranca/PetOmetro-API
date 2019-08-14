@@ -28,10 +28,11 @@ namespace PetOmetro.API.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ConsultaPaginadaViewModel<PetViewModel>))]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError, Type = typeof(ResponseInternalServerError))]
         public async Task<ActionResult<ConsultaPaginadaViewModel<PetViewModel>>> GetAll([FromQuery]List<int> ids, [FromQuery]string nome,
-            [FromQuery]string especie, [FromQuery]string raca, [FromQuery]List<int> idGeneros, [FromQuery]int? pagina, [FromQuery]int? itensPorPagina)
+            [FromQuery]string especie, [FromQuery]string raca, [FromQuery]List<int> idGeneros, [FromQuery]bool? dono, [FromQuery]int? pagina, [FromQuery]int? itensPorPagina, [FromQuery]bool meusPets = false)
         {
             var query = new GetPetsQuery()
             {
@@ -40,6 +41,8 @@ namespace PetOmetro.API.Controllers
                 Especie = especie,
                 Raca = raca,
                 IdGeneros = idGeneros,
+                MeusPets = meusPets,
+                Dono = dono,
                 Paginacao = new PaginacaoViewModel(pagina, itensPorPagina)
             };
 

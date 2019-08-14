@@ -12,6 +12,8 @@ namespace PetOmetro.Application.Pets.Queries.GetPets
         public string Especie { get; set; }
         public string Raca { get; set; }
         public List<int> IdGeneros { get; set; }
+        public bool MeusPets { get; set; }
+        public bool? Dono { get; set; }
         public PaginacaoViewModel Paginacao { get; set; }
     }
 }
