@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using PetOmetro.Application.Exceptions;
 using PetOmetro.Application.Paginacoes.Models;
+using PetOmetro.Application.SolicitacoesPet.Command.CancelSolicitacaoPet;
 using PetOmetro.Application.SolicitacoesPet.Command.CreateSolicitacaoPet;
 using PetOmetro.Application.SolicitacoesPet.Command.FinalizeSolicitacaoPet;
 using PetOmetro.Application.SolicitacoesPet.Models;
@@ -78,6 +79,20 @@ namespace PetOmetro.API.Controllers
             var command = Mapper.Map<FinalizeSolicitacaoPetCommand>(model);
 
             return Ok(await Mediator.Send(command));
+        }
+
+        [Authorize]
+        [HttpDelete("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound, Type = typeof(ResponseNotFound))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ResponseBadRequest))]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(ResponseUnauthorized))]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError, Type = typeof(ResponseInternalServerError))]
+        public async Task<IActionResult> Cancel(int id)
+        {
+            await Mediator.Send(new CancelSolicitacaoPetCommand() { Id = id });
+
+            return NoContent();
         }
     }
 }

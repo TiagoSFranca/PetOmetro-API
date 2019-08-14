@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using PetOmetro.Application.Exceptions;
 using PetOmetro.Application.Interfaces.BaseApplications;
 using PetOmetro.Application.SolicitacoesPet.Models;
+using PetOmetro.Domain.Entities;
 using PetOmetro.Domain.Seeds;
 using PetOmetro.Persistence;
 using System;
@@ -48,6 +49,18 @@ namespace PetOmetro.Application.SolicitacoesPet.Command.FinalizeSolicitacaoPet
             try
             {
                 _context.SolicitacoesPet.Update(entity);
+                if (!request.Recusado)
+                {
+                    var pet = await _context.Pets.FindAsync(entity.IdPet);
+
+                    PetUsuario petUsuario = new PetUsuario()
+                    {
+                        IdPet = entity.IdPet,
+                        IdUsuario = pet.IdUsuario == entity.IdUsuarioSolicitado ? entity.IdUsuarioSolicitante : entity.IdUsuarioSolicitado
+                    };
+
+                    _context.PetUsuarios.Add(petUsuario);
+                }
 
                 await _context.SaveChangesAsync();
             }
