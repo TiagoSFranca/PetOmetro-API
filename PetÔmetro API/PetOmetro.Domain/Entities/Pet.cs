@@ -16,7 +16,7 @@ namespace PetOmetro.Domain.Entities
         public string Especie { get; set; }
         public string Raca { get; set; }
         public DateTime? DtNascimento { get; set; }
-        public string Comentário { get; set; }
+        public string Comentario { get; set; }
         public string UrlImagem { get; set; }
 
         public int IdGeneroPet { get; set; }

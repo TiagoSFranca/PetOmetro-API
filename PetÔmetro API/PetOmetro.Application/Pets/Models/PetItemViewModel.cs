@@ -12,7 +12,7 @@ namespace PetOmetro.Application.Pets.Models
         public int IdGeneroPet { get; set; }
         public int IdUsuario { get; set; }
 
-        public string Comentário { get; set; }
+        public string Comentario { get; set; }
         public string UrlImagem { get; set; }
     }
 }

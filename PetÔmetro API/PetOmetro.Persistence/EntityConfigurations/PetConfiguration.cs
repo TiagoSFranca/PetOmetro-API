@@ -22,7 +22,7 @@ namespace PetOmetro.Persistence.EntityConfigurations
             builder.Property(e => e.Raca)
                 .HasMaxLength(64);
 
-            builder.Property(e => e.Comentário)
+            builder.Property(e => e.Comentario)
                 .HasMaxLength(512);
 
             builder.Property(e => e.Especie)
