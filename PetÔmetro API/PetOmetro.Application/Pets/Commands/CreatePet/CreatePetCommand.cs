@@ -11,7 +11,7 @@ namespace PetOmetro.Application.Pets.Commands.CreatePet
         public string Raca { get; set; }
         public DateTime? DtNascimento { get; set; }
         public int IdGeneroPet { get; set; }
-        public string Comentário { get; set; }
+        public string Comentario { get; set; }
     }
 
     public class CreatePetCommand : IRequest<PetViewModel>
@@ -21,6 +21,6 @@ namespace PetOmetro.Application.Pets.Commands.CreatePet
         public string Raca { get; set; }
         public DateTime? DtNascimento { get; set; }
         public int IdGeneroPet { get; set; }
-        public string Comentário { get; set; }
+        public string Comentario { get; set; }
     }
 }

@@ -16,10 +16,10 @@ namespace PetOmetro.Application.Pets.Commands.CreatePet
             RuleFor(e => e.Especie)
                 .MaximumLength(64);
 
-            RuleFor(e => e.Comentário)
+            RuleFor(e => e.Comentario)
                 .MaximumLength(512);
 
-            RuleFor(e => e.Comentário)
+            RuleFor(e => e.Comentario)
                 .MaximumLength(256);
 
             RuleFor(e => e.IdGeneroPet)
