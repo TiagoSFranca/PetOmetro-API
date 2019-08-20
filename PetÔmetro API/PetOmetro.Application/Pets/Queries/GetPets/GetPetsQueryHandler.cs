@@ -17,7 +17,7 @@ namespace PetOmetro.Application.Pets.Queries.GetPets
         private readonly IPaginacaoBaseApplication<Pet, PetViewModel> _paginacaoBaseApplication;
         private readonly IAuthBaseApplication _authBaseApplication;
 
-        public GetPetsQueryHandler(PetOmetroContext context, IPaginacaoBaseApplication<Pet, PetViewModel> paginacaoBaseApplication, 
+        public GetPetsQueryHandler(PetOmetroContext context, IPaginacaoBaseApplication<Pet, PetViewModel> paginacaoBaseApplication,
             IAuthBaseApplication authBaseApplication)
         {
             _context = context;
@@ -49,10 +49,10 @@ namespace PetOmetro.Application.Pets.Queries.GetPets
                 var usuario = await _authBaseApplication.GetUsuarioLogado();
                 var idUsuario = usuario.Id;
 
+                query = query.Where(e => e.IdUsuario == idUsuario || e.PetUsuarios.Any(p => p.IdUsuario == idUsuario));
+
                 if (request.Dono != null)
                 {
-                    query = query.Where(e => e.IdUsuario == idUsuario || e.PetUsuarios.Any(p => p.IdUsuario == idUsuario));
-
                     if (request.Dono == true)
                         query = query.Where(e => e.IdUsuario == idUsuario);
                     else

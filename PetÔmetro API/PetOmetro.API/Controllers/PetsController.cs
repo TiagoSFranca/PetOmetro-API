@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using PetOmetro.Application.Exceptions;
 using PetOmetro.Application.Paginacoes.Models;
 using PetOmetro.Application.Pets.Commands.CreatePet;
+using PetOmetro.Application.Pets.Commands.DeletePet;
 using PetOmetro.Application.Pets.Models;
 using PetOmetro.Application.Pets.Queries.GetPets;
 using System.Collections.Generic;
@@ -47,6 +48,19 @@ namespace PetOmetro.API.Controllers
             };
 
             return Ok(await Mediator.Send(query));
+        }
+
+        [Authorize]
+        [HttpDelete("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.NoContent)]
+        [ProducesResponseType((int)HttpStatusCode.NotFound, Type = typeof(ResponseNotFound))]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(ResponseUnauthorized))]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError, Type = typeof(ResponseInternalServerError))]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await Mediator.Send(new DeletePetCommand() { Id = id });
+
+            return NoContent();
         }
     }
 }
