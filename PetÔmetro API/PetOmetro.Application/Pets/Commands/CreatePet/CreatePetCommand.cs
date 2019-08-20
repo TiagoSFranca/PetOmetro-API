@@ -1,4 +1,6 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Internal;
 using PetOmetro.Application.Pets.Models;
 using System;
 
@@ -12,6 +14,7 @@ namespace PetOmetro.Application.Pets.Commands.CreatePet
         public DateTime? DtNascimento { get; set; }
         public int IdGeneroPet { get; set; }
         public string Comentario { get; set; }
+        public IFormFile Imagem { get; set; }
     }
 
     public class CreatePetCommand : IRequest<PetViewModel>
@@ -22,5 +25,6 @@ namespace PetOmetro.Application.Pets.Commands.CreatePet
         public DateTime? DtNascimento { get; set; }
         public int IdGeneroPet { get; set; }
         public string Comentario { get; set; }
+        public FormFile Imagem { get; set; }
     }
 }

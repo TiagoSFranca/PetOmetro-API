@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using PetOmetro.Application.Pets;
 using System;
 using System.Linq;
 using System.Reflection;
@@ -7,7 +9,7 @@ namespace PetOmetro.Application.Settings.AutoMapper
 {
     public class AutoMapperProfile : Profile
     {
-        public AutoMapperProfile()
+        public AutoMapperProfile(IHttpContextAccessor acessor)
         {
             CreateMap<string, string>().ConvertUsing(str => str == null ? null : str.Trim());
 
@@ -17,8 +19,15 @@ namespace PetOmetro.Application.Settings.AutoMapper
 
             foreach (var type in types)
             {
-                var instance = Activator.CreateInstance(type, this);
+                Activator.CreateInstance(type, this);
             }
+
+            SpecificMappers(acessor);
+        }
+
+        private void SpecificMappers(IHttpContextAccessor acessor)
+        {
+            new PetsMapper(this, acessor);
         }
     }
 }

@@ -19,8 +19,8 @@ namespace PetOmetro.Application.Pets.Commands.CreatePet
             RuleFor(e => e.Comentario)
                 .MaximumLength(512);
 
-            RuleFor(e => e.Comentario)
-                .MaximumLength(256);
+            //RuleFor(e => e.Comentario)
+            //    .MaximumLength(256);
 
             RuleFor(e => e.IdGeneroPet)
                 .GreaterThan(0);

@@ -20,7 +20,7 @@ namespace PetOmetro.API.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ResponseBadRequest))]
         [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(ResponseUnauthorized))]
         [ProducesResponseType((int)HttpStatusCode.InternalServerError, Type = typeof(ResponseInternalServerError))]
-        public async Task<ActionResult<PetViewModel>> Create(CreatePet model)
+        public async Task<ActionResult<PetViewModel>> Create([FromForm]CreatePet model)
         {
             var command = Mapper.Map<CreatePetCommand>(model);
 

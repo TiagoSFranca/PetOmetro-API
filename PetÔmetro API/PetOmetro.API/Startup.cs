@@ -1,26 +1,20 @@
 ﻿using AutoMapper;
 using FluentValidation.AspNetCore;
 using MediatR;
-using MediatR.Pipeline;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using PetOmetro.API.Filters;
-using PetOmetro.Application.BaseApplications;
+using PetOmetro.API.Helpers;
 using PetOmetro.Application.GenerosPet.Queries.GetGeneroPets;
-using PetOmetro.Application.Interfaces.BaseApplications;
-using PetOmetro.Application.Interfaces.Services;
-using PetOmetro.Application.Settings;
 using PetOmetro.Application.Settings.AutoMapper;
 using PetOmetro.Application.Settings.Models;
-using PetOmetro.Infrastructure.Services;
 using PetOmetro.Persistence;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
@@ -52,19 +46,8 @@ namespace PetOmetro.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAutoMapper(new Assembly[] { typeof(AutoMapperProfile).GetTypeInfo().Assembly });
+            DependencyInjectionHelper.Configure(services);
 
-            #region Dependency Injections
-
-            services.AddTransient<IJwtService, JwtService>();
-            services.AddTransient<IAuthBaseApplication, AuthBaseApplication>();
-            services.AddTransient(typeof(IPaginacaoBaseApplication<,>), typeof(PaginacaoBaseApplication<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPreProcessorBehavior<,>));
-            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
-
-            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-
-            #endregion
 
             services.AddMediatR(typeof(GetGenerosPetQuery).GetTypeInfo().Assembly);
 
@@ -124,6 +107,7 @@ namespace PetOmetro.API
                     Description = _appSettings.Description,
                     TermsOfService = "None",
                 });
+                c.OperationFilter<FileUploadOperation>();
             });
         }
 

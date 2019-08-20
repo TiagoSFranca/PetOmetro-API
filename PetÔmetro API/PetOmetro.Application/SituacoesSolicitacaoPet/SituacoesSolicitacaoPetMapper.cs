@@ -15,5 +15,6 @@ namespace PetOmetro.Application.SituacoesSolicitacaoPet
         {
             profile.CreateMap<SituacaoSolicitacaoPet, SituacaoSolicitacaoPetViewModel>();
         }
+
     }
 }
