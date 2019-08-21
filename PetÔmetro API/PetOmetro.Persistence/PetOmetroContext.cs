@@ -1,9 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using PetOmetro.Domain.Entities;
+using PetOmetro.Identity.Models;
 
 namespace PetOmetro.Persistence
 {
-    public class PetOmetroContext : DbContext
+    public class PetOmetroContext : IdentityDbContext<ApplicationUser, IdentityRole<int>, int>
     {
         public PetOmetroContext(DbContextOptions<PetOmetroContext> options)
             : base(options)
@@ -23,6 +26,7 @@ namespace PetOmetro.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(PetOmetroContext).Assembly);
         }
     }

@@ -1,10 +1,10 @@
-﻿using AutoMapper;
-using FluentValidation.AspNetCore;
+﻿using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -13,8 +13,9 @@ using Microsoft.IdentityModel.Tokens;
 using PetOmetro.API.Filters;
 using PetOmetro.API.Helpers;
 using PetOmetro.Application.GenerosPet.Queries.GetGeneroPets;
-using PetOmetro.Application.Settings.AutoMapper;
 using PetOmetro.Application.Settings.Models;
+using PetOmetro.Identity.Models;
+using PetOmetro.Identity.Settings;
 using PetOmetro.Persistence;
 using Swashbuckle.AspNetCore.Swagger;
 using System;
@@ -48,7 +49,6 @@ namespace PetOmetro.API
         {
             DependencyInjectionHelper.Configure(services);
 
-
             services.AddMediatR(typeof(GetGenerosPetQuery).GetTypeInfo().Assembly);
 
             services.AddCors();
@@ -57,6 +57,12 @@ namespace PetOmetro.API
                 .AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetGenerosPetQuery>());
+
+            services
+                .AddIdentity<ApplicationUser, IdentityRole<int>>()
+                .AddEntityFrameworkStores<PetOmetroContext>()
+                .AddDefaultTokenProviders()
+                .AddPasswordValidator<ApplicationPasswordValidator>();
 
             services.AddDbContext<PetOmetroContext>(options =>
                 options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("PetOmetroConnection")));
