@@ -15,5 +15,6 @@ namespace PetOmetro.Identity.Settings
             : base(userManager, contextAccessor, claimsFactory, optionsAccessor, logger, schemes)
         {
         }
+
     }
 }
