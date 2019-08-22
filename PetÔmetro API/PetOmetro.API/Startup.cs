@@ -147,6 +147,8 @@ namespace PetOmetro.API
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            SeedData.Run(app.ApplicationServices).Wait();
         }
     }
 }

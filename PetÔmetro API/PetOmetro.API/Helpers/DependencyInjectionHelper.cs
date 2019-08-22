@@ -27,6 +27,7 @@ namespace PetOmetro.API.Helpers
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
             services.AddTransient<UserManager<ApplicationUser>, ApplicationUserManager>();
             services.AddTransient<SignInManager<ApplicationUser>, ApplicationSignInManager>();
+            services.AddTransient<SeedData>();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
