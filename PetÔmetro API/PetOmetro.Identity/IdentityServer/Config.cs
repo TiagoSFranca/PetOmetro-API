@@ -6,6 +6,8 @@ namespace PetOmetro.Identity.IdentityServer
 {
     public static class Config
     {
+        public static string _apiName = "petometro_api";
+
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
             return new List<IdentityResource>
@@ -19,7 +21,7 @@ namespace PetOmetro.Identity.IdentityServer
         {
             return new List<ApiResource>
             {
-                new ApiResource("api", "My API")
+                new ApiResource(_apiName, "My API")
             };
         }
 
@@ -41,7 +43,7 @@ namespace PetOmetro.Identity.IdentityServer
                     },
 
                     // scopes that client has access to
-                    AllowedScopes = { "api" }
+                    AllowedScopes = { _apiName }
                 },
                 // resource owner password grant client
                 new Client
@@ -53,7 +55,7 @@ namespace PetOmetro.Identity.IdentityServer
                     {
                         new Secret("secret".Sha256())
                     },
-                    AllowedScopes = { "api" }
+                    AllowedScopes = { _apiName }
                 },
                 // OpenID Connect hybrid flow client (MVC)
                 new Client
@@ -74,7 +76,7 @@ namespace PetOmetro.Identity.IdentityServer
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
-                        "api"
+                        _apiName
                     },
 
                     AllowOfflineAccess = true
@@ -91,7 +93,7 @@ namespace PetOmetro.Identity.IdentityServer
 
                     AllowedScopes =
                     {
-                        "api",
+                        _apiName,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.OpenId,
                     }

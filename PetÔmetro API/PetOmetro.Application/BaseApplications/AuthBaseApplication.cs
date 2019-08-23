@@ -10,15 +10,12 @@ namespace PetOmetro.Application.BaseApplications
 {
     public class AuthBaseApplication : IAuthBaseApplication
     {
-        private readonly IJwtService _jwtService;
         private readonly PetOmetroContext _context;
         private readonly int? IdUsuario;
 
-        public AuthBaseApplication(IJwtService jwtService, PetOmetroContext context)
+        public AuthBaseApplication( PetOmetroContext context)
         {
-            _jwtService = jwtService;
             _context = context;
-            IdUsuario = _jwtService.Id;
         }
 
         public async Task<Usuario> GetUsuarioLogado()

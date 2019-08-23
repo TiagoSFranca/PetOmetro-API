@@ -16,13 +16,11 @@ namespace PetOmetro.Application.Usuarios.Commands.Auth
     {
         private readonly PetOmetroContext _context;
         private readonly IMapper _mapper;
-        private readonly IJwtService _jwtService;
 
-        public AuthCommandHandler(PetOmetroContext context, IMapper mapper, IJwtService jwtService)
+        public AuthCommandHandler(PetOmetroContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
-            _jwtService = jwtService;
         }
 
         public async Task<AuthUsuario> Handle(AuthCommand request, CancellationToken cancellationToken)
@@ -41,8 +39,7 @@ namespace PetOmetro.Application.Usuarios.Commands.Auth
 
             try
             {
-                var token = _jwtService.GetToken(usuario);
-                retorno.Token = token;
+                retorno.Token = "";
             }
             catch (Exception)
             {

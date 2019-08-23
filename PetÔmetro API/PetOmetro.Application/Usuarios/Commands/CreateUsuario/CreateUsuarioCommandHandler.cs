@@ -2,7 +2,6 @@
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using PetOmetro.Application.Exceptions;
-using PetOmetro.Application.Interfaces.Services;
 using PetOmetro.Application.Usuarios.Models;
 using PetOmetro.Common.Helpers;
 using PetOmetro.Domain.Entities;
@@ -17,13 +16,11 @@ namespace PetOmetro.Application.Usuarios.Commands.CreateUsuario
     {
         private readonly PetOmetroContext _context;
         private readonly IMapper _mapper;
-        private readonly IJwtService _jwtService;
 
-        public CreateUsuarioCommandHandler(PetOmetroContext context, IMapper mapper, IJwtService jwtService)
+        public CreateUsuarioCommandHandler(PetOmetroContext context, IMapper mapper)
         {
             _context = context;
             _mapper = mapper;
-            _jwtService = jwtService;
         }
 
         public async Task<AuthUsuario> Handle(CreateUsuarioCommand request, CancellationToken cancellationToken)
@@ -53,7 +50,7 @@ namespace PetOmetro.Application.Usuarios.Commands.CreateUsuario
 
             try
             {
-                var token = _jwtService.GetToken(entity);
+                var token = "";
                 retorno.Token = token;
             }
             catch (Exception)

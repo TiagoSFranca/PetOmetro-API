@@ -1,20 +1,24 @@
 ﻿using FluentValidation.AspNetCore;
 using MediatR;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.IdentityModel.Tokens;
 using PetOmetro.API.Filters;
 using PetOmetro.API.Helpers;
 using PetOmetro.Application.GenerosPet.Queries.GetGeneroPets;
 using PetOmetro.Application.Settings.Models;
+using PetOmetro.Identity.Helpers;
 using PetOmetro.Identity.IdentityServer;
 using PetOmetro.Identity.Models;
 using PetOmetro.Identity.Settings;
-using PetOmetro.Identity.Helpers;
 using PetOmetro.Persistence;
 using Swashbuckle.AspNetCore.Swagger;
 using System.Reflection;
@@ -53,7 +57,14 @@ namespace PetOmetro.API
             services.AddCors();
 
             services
-                .AddMvc(options => options.Filters.Add(typeof(CustomExceptionFilterAttribute)))
+                .AddMvc(options =>
+                {
+                    options.Filters.Add(typeof(CustomExceptionFilterAttribute));
+                    var policy = new AuthorizationPolicyBuilder()
+                           .RequireAuthenticatedUser()
+                           .RequireScope(Config._apiName).Build();
+                    options.Filters.Add(new AuthorizeFilter(policy));
+                })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetGenerosPetQuery>());
 
@@ -97,33 +108,26 @@ namespace PetOmetro.API
                 builder.AddSigningCredential(SigningCredentialHelper.CreateSigningCredential());
             }
 
-            //var key = Encoding.ASCII.GetBytes(_appSettings.SecretKey);
-            //services.AddAuthentication(x =>
-            //{
-            //    x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-            //    x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            //})
-            //.AddJwtBearer(x =>
-            //{
-            //    x.RequireHttpsMetadata = false;
-            //    x.SaveToken = true;
-            //    x.TokenValidationParameters = new TokenValidationParameters
-            //    {
-            //        ValidateIssuerSigningKey = _appSettings.JWTSettings.ValidateIssuerSigningKey,
-            //        IssuerSigningKey = new SymmetricSecurityKey(key),
-            //        ValidateIssuer = _appSettings.JWTSettings.ValidateIssuer,
-            //        ValidateAudience = _appSettings.JWTSettings.ValidateAudience,
-            //        ValidateLifetime = _appSettings.JWTSettings.ValidateLifetime,
-            //        ClockSkew = TimeSpan.Zero
-            //    };
-            //});
-
-            //services.AddAuthorization(auth =>
-            //{
-            //    auth.AddPolicy("Bearer", new AuthorizationPolicyBuilder()
-            //        .AddAuthenticationSchemes(JwtBearerDefaults.AuthenticationScheme)
-            //        .RequireAuthenticatedUser().Build());
-            //});
+            services
+                .AddAuthorization()
+                .AddAuthentication(options =>
+                {
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                }).AddJwtBearer(options =>
+                {
+                    options.Authority = _appSettings.Authority;
+                    options.RequireHttpsMetadata = false;
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateAudience = true,
+                        ValidAudiences = new[]
+                        {
+                            $"{_appSettings.Authority}/resources",
+                            Config._apiName
+                        },
+                    };
+                });
 
             services.AddSwaggerGen(c =>
             {
@@ -165,6 +169,7 @@ namespace PetOmetro.API
                 .AllowAnyMethod()
                 .AllowAnyHeader());
 
+            app.UseAuthentication();
             app.UseIdentityServer();
 
             app.UseHttpsRedirection();

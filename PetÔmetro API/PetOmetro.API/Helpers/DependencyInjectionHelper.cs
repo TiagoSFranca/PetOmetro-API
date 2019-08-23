@@ -19,7 +19,6 @@ namespace PetOmetro.API.Helpers
     {
         public static void Configure(IServiceCollection services)
         {
-            services.AddTransient<IJwtService, JwtService>();
             services.AddTransient<IAuthBaseApplication, AuthBaseApplication>();
             services.AddTransient<IFileService, FileService>();
             services.AddTransient(typeof(IPaginacaoBaseApplication<,>), typeof(PaginacaoBaseApplication<,>));
