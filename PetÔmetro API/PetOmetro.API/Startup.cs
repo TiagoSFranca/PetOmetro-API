@@ -10,12 +10,10 @@ using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.IdentityModel.Tokens;
 using PetOmetro.API.Filters;
 using PetOmetro.API.Helpers;
 using PetOmetro.Application.GenerosPet.Queries.GetGeneroPets;
 using PetOmetro.Application.Settings.Models;
-using PetOmetro.Identity.Helpers;
 using PetOmetro.Identity.IdentityServer;
 using PetOmetro.Identity.Models;
 using PetOmetro.Identity.Settings;
@@ -29,10 +27,9 @@ namespace PetOmetro.API
     {
         private const string _appSettingsSectionName = "AppSettings";
 
-        public Startup(IConfiguration configuration, IHostingEnvironment env)
+        public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            Env = env;
 
             _appSettingsSection = Configuration
                 .GetSection(_appSettingsSectionName);
@@ -47,14 +44,15 @@ namespace PetOmetro.API
 
         private readonly AppSettings _appSettings;
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             DependencyInjectionHelper.Configure(services);
 
-            services.AddMediatR(typeof(GetGenerosPetQuery).GetTypeInfo().Assembly);
+            services
+                .AddMediatR(typeof(GetGenerosPetQuery).GetTypeInfo().Assembly);
 
-            services.AddCors();
+            services
+                .AddCors();
 
             services
                 .AddMvc(options =>
@@ -78,72 +76,47 @@ namespace PetOmetro.API
                 options.UseLazyLoadingProxies().UseSqlServer(Configuration.GetConnectionString("PetOmetroConnection")));
 
 
-            services.Configure<AppSettings>(_appSettingsSection);
-
-            services.Configure<ApiBehaviorOptions>(options =>
-            {
-                options.SuppressModelStateInvalidFilter = true;
-            });
-
-            var builder = services
-                .AddIdentityServer(options =>
-                {
-                    options.Events.RaiseErrorEvents = true;
-                    options.Events.RaiseInformationEvents = true;
-                    options.Events.RaiseFailureEvents = true;
-                    options.Events.RaiseSuccessEvents = true;
-                })
-                .AddInMemoryIdentityResources(Config.GetIdentityResources())
-                .AddInMemoryApiResources(Config.GetApis())
-                .AddInMemoryClients(Config.GetClients())
-                .AddAspNetIdentity<ApplicationUser>()
-                .AddProfileService<ApplicationProfileService>();
-
-            if (Env.IsDevelopment())
-            {
-                builder.AddDeveloperSigningCredential();
-            }
-            else
-            {
-                builder.AddSigningCredential(SigningCredentialHelper.CreateSigningCredential());
-            }
+            services
+                .Configure<AppSettings>(_appSettingsSection);
 
             services
-                .AddAuthorization()
+                .Configure<ApiBehaviorOptions>(options =>
+                {
+                    options.SuppressModelStateInvalidFilter = true;
+                });
+
+            services.AddAuthorization();
+
+            services
                 .AddAuthentication(options =>
                 {
                     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                     options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                }).AddJwtBearer(options =>
+                })
+                .AddIdentityServerAuthentication(options =>
                 {
                     options.Authority = _appSettings.Authority;
-                    options.RequireHttpsMetadata = false;
-                    options.TokenValidationParameters = new TokenValidationParameters
-                    {
-                        ValidateAudience = true,
-                        ValidAudiences = new[]
-                        {
-                            $"{_appSettings.Authority}/resources",
-                            Config._apiName
-                        },
-                    };
+
+                    options.ApiName = Config._apiName;
+                    options.ApiSecret = Config._apiSecret;
+
                 });
 
-            services.AddSwaggerGen(c =>
-            {
-                c.OperationFilter<AuthorizationHeaderParameterOperationFilter>();
-                c.SwaggerDoc(_appSettings.Version, new Info
+            services
+                .AddSwaggerGen(c =>
                 {
-                    Version = _appSettings.Version,
-                    Title = _appSettings.Name,
-                    Description = _appSettings.Description,
-                    TermsOfService = "None",
+                    c.OperationFilter<AuthorizationHeaderParameterOperationFilter>();
+                    c.SwaggerDoc(_appSettings.Version, new Info
+                    {
+                        Version = _appSettings.Version,
+                        Title = _appSettings.Name,
+                        Description = _appSettings.Description,
+                        TermsOfService = "None",
+                    });
+                    c.OperationFilter<FileUploadOperation>();
                 });
-                c.OperationFilter<FileUploadOperation>();
-            });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -152,7 +125,6 @@ namespace PetOmetro.API
             }
             else
             {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
@@ -164,16 +136,19 @@ namespace PetOmetro.API
             });
 
             // global cors policy
-            app.UseCors(x => x
+            app
+                .UseCors(x => x
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
 
-            app.UseAuthentication();
-            app.UseIdentityServer();
+            app
+                .UseAuthentication();
 
-            app.UseHttpsRedirection();
-            app.UseMvc();
+            app
+                .UseHttpsRedirection();
+            app
+                .UseMvc();
 
             SeedData.Run(app.ApplicationServices).Wait();
         }

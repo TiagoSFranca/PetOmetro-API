@@ -7,6 +7,7 @@ namespace PetOmetro.Identity.IdentityServer
     public static class Config
     {
         public static string _apiName = "petometro_api";
+        public static string _apiSecret = "SBEBEBABABQBIDQ";
 
         public static IEnumerable<IdentityResource> GetIdentityResources()
         {
@@ -22,6 +23,12 @@ namespace PetOmetro.Identity.IdentityServer
             return new List<ApiResource>
             {
                 new ApiResource(_apiName, "My API")
+                {
+                    ApiSecrets =
+                    {
+                        new Secret(_apiSecret.Sha256())
+                    }
+                }
             };
         }
 
@@ -83,6 +90,7 @@ namespace PetOmetro.Identity.IdentityServer
                 },
                 new Client
                 {
+                    AccessTokenType = AccessTokenType.Reference,
                     ClientId = "vue",
                     ClientName = "Vue Client",
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,

@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetOmetro.Infrastructure", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PetOmetro.Identity", "PetOmetro.Identity\PetOmetro.Identity.csproj", "{FCAF7A2B-AC38-40E8-8869-2254A517A9EA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PetOmetro.IdentityServer", "PetOmetro.IdentityServer\PetOmetro.IdentityServer.csproj", "{8E5651B5-3F1E-40F6-8C77-D799DCC608B5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{FCAF7A2B-AC38-40E8-8869-2254A517A9EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FCAF7A2B-AC38-40E8-8869-2254A517A9EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FCAF7A2B-AC38-40E8-8869-2254A517A9EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8E5651B5-3F1E-40F6-8C77-D799DCC608B5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8E5651B5-3F1E-40F6-8C77-D799DCC608B5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8E5651B5-3F1E-40F6-8C77-D799DCC608B5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8E5651B5-3F1E-40F6-8C77-D799DCC608B5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,6 +83,7 @@ Global
 		{A7E18084-9A28-443F-B884-A8F4A6C708F2} = {9EE6CFE8-F8F0-4B1B-AB37-7560A12B677E}
 		{867396F9-ADC5-4BD6-B31A-AF2853736551} = {C3FC61CA-840B-497A-88F6-2F815E3D5136}
 		{FCAF7A2B-AC38-40E8-8869-2254A517A9EA} = {C3FC61CA-840B-497A-88F6-2F815E3D5136}
+		{8E5651B5-3F1E-40F6-8C77-D799DCC608B5} = {58BE1108-ED71-45F7-B18C-910D462210E0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {03A2F807-5923-486F-AA1D-79059F474794}

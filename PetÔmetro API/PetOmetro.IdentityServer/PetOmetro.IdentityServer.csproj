@@ -6,19 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="6.1.1" />
-    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.7.0" />
-    <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+    <PackageReference Include="IdentityServer4" Version="2.5.2" />
+    <PackageReference Include="IdentityServer4.AspNetIdentity" Version="2.5.2" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.2.0" PrivateAssets="All" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="2.2.6" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="4.0.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\PetOmetro.Application\PetOmetro.Application.csproj" />
     <ProjectReference Include="..\PetOmetro.Identity\PetOmetro.Identity.csproj" />
-    <ProjectReference Include="..\PetOmetro.Infrastructure\PetOmetro.Infrastructure.csproj" />
     <ProjectReference Include="..\PetOmetro.Persistence\PetOmetro.Persistence.csproj" />
   </ItemGroup>
 
