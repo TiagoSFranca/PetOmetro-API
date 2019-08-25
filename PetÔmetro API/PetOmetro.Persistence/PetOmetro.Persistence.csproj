@@ -19,6 +19,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\PetOmetro.Domain\PetOmetro.Domain.csproj" />
+    <ProjectReference Include="..\PetOmetro.Identity\PetOmetro.Identity.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore">
+      <HintPath>..\..\..\..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.identity.entityframeworkcore\2.2.0\lib\netstandard2.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

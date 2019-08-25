@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PetOmetro.Identity.Models;
+using System;
 
 namespace PetOmetro.Domain.Entities
 {
@@ -14,8 +15,8 @@ namespace PetOmetro.Domain.Entities
         public DateTime DataSolicitacao { get; set; }
         public DateTime? DataFinalizacao { get; set; }
 
-        public virtual Usuario UsuarioSolicitante { get; set; }
-        public virtual Usuario UsuarioSolicitado { get; set; }
+        public virtual ApplicationUser UsuarioSolicitante { get; set; }
+        public virtual ApplicationUser UsuarioSolicitado { get; set; }
         public virtual Pet Pet { get; set; }
         public virtual SituacaoSolicitacaoPet SituacaoSolicitacao { get; set; }
     }

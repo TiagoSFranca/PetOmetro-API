@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PetOmetro.Persistence;
 
 namespace PetOmetro.Persistence.Migrations
 {
     [DbContext(typeof(PetOmetroContext))]
-    partial class PetOmetroContextModelSnapshot : ModelSnapshot
+    [Migration("20190821185416_Quinta")]
+    partial class Quinta
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -242,7 +244,37 @@ namespace PetOmetro.Persistence.Migrations
                     b.ToTable("SolicitacaoPet");
                 });
 
-            modelBuilder.Entity("PetOmetro.Identity.Models.ApplicationUser", b =>
+            modelBuilder.Entity("PetOmetro.Domain.Entities.Usuario", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(256);
+
+                    b.Property<string>("Login")
+                        .IsRequired()
+                        .HasMaxLength(64);
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasMaxLength(32);
+
+                    b.Property<string>("Senha")
+                        .IsRequired()
+                        .HasMaxLength(256);
+
+                    b.Property<string>("Sobrenome")
+                        .HasMaxLength(64);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Usuario");
+                });
+
+            modelBuilder.Entity("PetOmetro.Identity.Models.UsuarioIdentity", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -261,8 +293,6 @@ namespace PetOmetro.Persistence.Migrations
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("Nome");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
@@ -306,7 +336,7 @@ namespace PetOmetro.Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("PetOmetro.Identity.Models.ApplicationUser")
+                    b.HasOne("PetOmetro.Identity.Models.UsuarioIdentity")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -314,7 +344,7 @@ namespace PetOmetro.Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("PetOmetro.Identity.Models.ApplicationUser")
+                    b.HasOne("PetOmetro.Identity.Models.UsuarioIdentity")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -327,7 +357,7 @@ namespace PetOmetro.Persistence.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("PetOmetro.Identity.Models.ApplicationUser")
+                    b.HasOne("PetOmetro.Identity.Models.UsuarioIdentity")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -335,7 +365,7 @@ namespace PetOmetro.Persistence.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
                 {
-                    b.HasOne("PetOmetro.Identity.Models.ApplicationUser")
+                    b.HasOne("PetOmetro.Identity.Models.UsuarioIdentity")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -348,8 +378,8 @@ namespace PetOmetro.Persistence.Migrations
                         .HasForeignKey("IdGeneroPet")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("PetOmetro.Identity.Models.ApplicationUser", "Usuario")
-                        .WithMany()
+                    b.HasOne("PetOmetro.Domain.Entities.Usuario", "Usuario")
+                        .WithMany("Pets")
                         .HasForeignKey("IdUsuario")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -361,8 +391,8 @@ namespace PetOmetro.Persistence.Migrations
                         .HasForeignKey("IdPet")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("PetOmetro.Identity.Models.ApplicationUser", "Usuario")
-                        .WithMany()
+                    b.HasOne("PetOmetro.Domain.Entities.Usuario", "Usuario")
+                        .WithMany("PetUsuarios")
                         .HasForeignKey("IdUsuario")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
@@ -379,13 +409,13 @@ namespace PetOmetro.Persistence.Migrations
                         .HasForeignKey("IdSituacaoSolicitacao")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("PetOmetro.Identity.Models.ApplicationUser", "UsuarioSolicitado")
-                        .WithMany()
+                    b.HasOne("PetOmetro.Domain.Entities.Usuario", "UsuarioSolicitado")
+                        .WithMany("SolicitacoesPetSolicitado")
                         .HasForeignKey("IdUsuarioSolicitado")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("PetOmetro.Identity.Models.ApplicationUser", "UsuarioSolicitante")
-                        .WithMany()
+                    b.HasOne("PetOmetro.Domain.Entities.Usuario", "UsuarioSolicitante")
+                        .WithMany("SolicitacoesPetSolicitante")
                         .HasForeignKey("IdUsuarioSolicitante")
                         .OnDelete(DeleteBehavior.Restrict);
                 });

@@ -35,7 +35,7 @@ namespace PetOmetro.Application.SolicitacoesPet.Command.CreateSolicitacaoPet
             if (idUsuario == request.IdUsuarioSolicitado)
                 throw new BusinessException("Você não pode enviar uma solicitação a si mesmo.");
 
-            var usuarioSolicitado = await _context.Usuarios.FirstOrDefaultAsync(e => e.Id == request.IdUsuarioSolicitado);
+            var usuarioSolicitado = await _context.Users.FirstOrDefaultAsync(e => e.Id == request.IdUsuarioSolicitado);
 
             if (usuarioSolicitado == null)
                 throw new NotFoundException("Usuário", request.IdUsuarioSolicitado);

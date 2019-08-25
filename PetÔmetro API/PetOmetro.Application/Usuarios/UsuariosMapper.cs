@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using PetOmetro.Application.Settings.AutoMapper;
-using PetOmetro.Application.Usuarios.Commands.Auth;
-using PetOmetro.Application.Usuarios.Commands.CreateUsuario;
 using PetOmetro.Application.Usuarios.Models;
-using PetOmetro.Domain.Entities;
+using PetOmetro.Identity.Models;
 
 namespace PetOmetro.Application.Usuarios
 {
@@ -16,12 +14,9 @@ namespace PetOmetro.Application.Usuarios
 
         protected override void Map(Profile profile)
         {
-            profile.CreateMap<CreateUsuarioCommand, UsuarioViewModel>();
-            profile.CreateMap<Usuario, UsuarioItemViewModel>().ReverseMap();
-            profile.CreateMap<Usuario, UsuarioViewModel>().ReverseMap();
-            profile.CreateMap<Usuario, AuthUsuario>();
-            profile.CreateMap<CreateUsuario, CreateUsuarioCommand>();
-            profile.CreateMap<Auth, AuthCommand>();
+            profile.CreateMap<ApplicationUser, UsuarioItemViewModel>().ReverseMap();
+            profile.CreateMap<ApplicationUser, UsuarioViewModel>().ReverseMap();
+            profile.CreateMap<ApplicationUser, AuthUsuario>();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PetOmetro.Identity.Models;
+using System;
 using System.Collections.Generic;
 
 namespace PetOmetro.Domain.Entities
@@ -23,7 +24,7 @@ namespace PetOmetro.Domain.Entities
         public int IdUsuario { get; set; }
 
         public virtual GeneroPet GeneroPet { get; set; }
-        public virtual Usuario Usuario { get; set; }
+        public virtual ApplicationUser Usuario { get; set; }
 
         public virtual ICollection<PetUsuario> PetUsuarios { get; set; }
         public virtual ICollection<SolicitacaoPet> SolicitacoesPet { get; set; }

@@ -22,12 +22,12 @@ namespace PetOmetro.Persistence.EntityConfigurations
                 .IsRequired();
 
             builder.HasOne(e => e.UsuarioSolicitante)
-                .WithMany(p => p.SolicitacoesPetSolicitante)
+                .WithMany()
                 .HasForeignKey(e => e.IdUsuarioSolicitante)
                 .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(e => e.UsuarioSolicitado)
-                .WithMany(p => p.SolicitacoesPetSolicitado)
+                .WithMany()
                 .HasForeignKey(e => e.IdUsuarioSolicitado)
                 .OnDelete(DeleteBehavior.Restrict);
 
