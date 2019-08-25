@@ -58,10 +58,10 @@ namespace PetOmetro.API
                 .AddMvc(options =>
                 {
                     options.Filters.Add(typeof(CustomExceptionFilterAttribute));
-                    var policy = new AuthorizationPolicyBuilder()
-                           .RequireAuthenticatedUser()
-                           .RequireScope(Config._apiName).Build();
-                    options.Filters.Add(new AuthorizeFilter(policy));
+                    //var policy = new AuthorizationPolicyBuilder()
+                    //       .RequireAuthenticatedUser()
+                    //       .RequireScope(Config._apiName).Build();
+                    //options.Filters.Add(new AuthorizeFilter(policy));
                 })
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetGenerosPetQuery>());
@@ -100,6 +100,7 @@ namespace PetOmetro.API
                     options.ApiName = Config._apiName;
                     options.ApiSecret = Config._apiSecret;
 
+                    options.RequireHttpsMetadata = false;
                 });
 
             services
