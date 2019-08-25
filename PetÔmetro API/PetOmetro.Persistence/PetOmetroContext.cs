@@ -17,7 +17,6 @@ namespace PetOmetro.Persistence
 
         public DbSet<GeneroPet> GenerosPet { get; set; }
         public DbSet<Pet> Pets { get; set; }
-        public DbSet<Usuario> Usuarios { get; set; }
         public DbSet<PetUsuario> PetUsuarios { get; set; }
         public DbSet<SituacaoSolicitacaoPet> SituacoesSolicitacaoPet { get; set; }
         public DbSet<SolicitacaoPet> SolicitacoesPet { get; set; }

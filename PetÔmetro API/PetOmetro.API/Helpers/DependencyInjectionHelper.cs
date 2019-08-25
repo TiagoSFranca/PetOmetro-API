@@ -9,6 +9,8 @@ using PetOmetro.Application.Interfaces.BaseApplications;
 using PetOmetro.Application.Interfaces.Services;
 using PetOmetro.Application.Settings;
 using PetOmetro.Application.Settings.AutoMapper;
+using PetOmetro.Identity.IdentityServer;
+using PetOmetro.Identity.Interfaces;
 using PetOmetro.Identity.Models;
 using PetOmetro.Identity.Settings;
 using PetOmetro.Infrastructure.Services;
@@ -21,6 +23,7 @@ namespace PetOmetro.API.Helpers
         {
             services.AddTransient<IAuthBaseApplication, AuthBaseApplication>();
             services.AddTransient<IFileService, FileService>();
+            services.AddTransient<IIdentityServerAuthService, IdentityServerAuthService>();
             services.AddTransient(typeof(IPaginacaoBaseApplication<,>), typeof(PaginacaoBaseApplication<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestPreProcessorBehavior<,>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));

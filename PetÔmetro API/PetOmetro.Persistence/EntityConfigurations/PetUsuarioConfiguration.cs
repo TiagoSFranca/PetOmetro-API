@@ -16,7 +16,7 @@ namespace PetOmetro.Persistence.EntityConfigurations
                 .IsRequired();
 
             builder.HasOne(e => e.Usuario)
-                .WithMany(p => p.PetUsuarios)
+                .WithMany()
                 .HasForeignKey(e => e.IdUsuario);
 
             builder.HasOne(e => e.Pet)

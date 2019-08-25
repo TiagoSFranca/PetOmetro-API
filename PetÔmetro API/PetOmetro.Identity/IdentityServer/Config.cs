@@ -96,11 +96,11 @@ namespace PetOmetro.Identity.IdentityServer
                     AllowedGrantTypes = GrantTypes.ResourceOwnerPassword,
                     RequirePkce = true,
                     RequireClientSecret = false,
-
-                    //AllowedCorsOrigins =     { "http://localhost:5003" },
-
-                    AllowedScopes =
-                    {
+                    AllowOfflineAccess = true,
+                    AllowedCorsOrigins = {
+                        "http://localhost:8080"
+                    },
+                    AllowedScopes = {
                         _apiName,
                         IdentityServerConstants.StandardScopes.Profile,
                         IdentityServerConstants.StandardScopes.OpenId,
