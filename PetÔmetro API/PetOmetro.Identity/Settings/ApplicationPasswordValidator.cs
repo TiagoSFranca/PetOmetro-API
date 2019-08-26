@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using PetOmetro.Identity.Exceptions;
 using PetOmetro.Identity.Models;
 using System;
 using System.Threading.Tasks;
@@ -11,11 +12,7 @@ namespace PetOmetro.Identity.Settings
         {
             if (string.Equals(user.UserName, password, StringComparison.OrdinalIgnoreCase))
             {
-                return Task.FromResult(IdentityResult.Failed(new IdentityError
-                {
-                    Code = "senha",
-                    Description = "Você não pode usar a senha igual ao login"
-                }));
+                throw new PasswordException("Você não pode usar a senha igual ao login");
             }
 
             return Task.FromResult(IdentityResult.Success);

@@ -16,8 +16,4 @@
     <ProjectReference Include="..\PetOmetro.Persistence\PetOmetro.Persistence.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Usuarios\Commands\" />
-  </ItemGroup>
-
 </Project>

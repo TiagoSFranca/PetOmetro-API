@@ -1,12 +1,10 @@
 ﻿using FluentValidation.AspNetCore;
 using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -67,7 +65,18 @@ namespace PetOmetro.API
                 .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<GetGenerosPetQuery>());
 
             services
-                .AddIdentity<ApplicationUser, IdentityRole<int>>()
+                .AddIdentity<ApplicationUser, IdentityRole<int>>(options =>
+                {
+                    options.Password = new PasswordOptions()
+                    {
+                        RequireDigit = false,
+                        RequiredLength = 8,
+                        RequiredUniqueChars = 0,
+                        RequireLowercase = false,
+                        RequireNonAlphanumeric = false,
+                        RequireUppercase = false
+                    };
+                })
                 .AddEntityFrameworkStores<PetOmetroContext>()
                 .AddDefaultTokenProviders()
                 .AddPasswordValidator<ApplicationPasswordValidator>();
