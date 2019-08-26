@@ -20,7 +20,7 @@ namespace PetOmetro.Infrastructure.Services
         {
             string filePath = string.Empty;
 
-            if (file.Length > 0)
+            if (file?.Length > 0)
             {
                 string partialPath = Guid.NewGuid().ToString();
                 filePath = Path.Combine(_uploadFolder, partialPath + Path.GetExtension(file.FileName));

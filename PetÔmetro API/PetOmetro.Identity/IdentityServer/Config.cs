@@ -98,7 +98,8 @@ namespace PetOmetro.Identity.IdentityServer
                     RequireClientSecret = false,
                     AllowOfflineAccess = true,
                     AllowedCorsOrigins = {
-                        "http://localhost:8080"
+                        "http://localhost:8080",
+                        "http://localhost:8081",
                     },
                     AllowedScopes = {
                         _apiName,
