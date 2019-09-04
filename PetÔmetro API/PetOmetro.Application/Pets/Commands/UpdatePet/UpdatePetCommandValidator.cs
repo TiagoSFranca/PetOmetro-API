@@ -1,11 +1,14 @@
 ﻿using FluentValidation;
 
-namespace PetOmetro.Application.Pets.Commands.CreatePet
+namespace PetOmetro.Application.Pets.Commands.UpdatePet
 {
-    public class CreatePetCommandValidator : AbstractValidator<CreatePetCommand>
+    public class UpdatePetCommandValidator : AbstractValidator<UpdatePetCommand>
     {
-        public CreatePetCommandValidator()
+        public UpdatePetCommandValidator()
         {
+            RuleFor(e => e.Id)
+                .GreaterThan(0);
+
             RuleFor(e => e.Nome)
                 .NotEmpty()
                 .MaximumLength(64);

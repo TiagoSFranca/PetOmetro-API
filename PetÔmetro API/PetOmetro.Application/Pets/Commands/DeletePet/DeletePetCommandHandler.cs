@@ -30,9 +30,7 @@ namespace PetOmetro.Application.Pets.Commands.DeletePet
             var usuario = await _authBaseApplication.GetUsuarioLogado();
             var idUsuario = usuario.Id;
 
-            var query = _context.Pets.AsQueryable();
-
-            var entity = await query.FirstOrDefaultAsync(e => e.Id == request.Id && e.IdUsuario == idUsuario);
+            var entity = await _context.Pets.FirstOrDefaultAsync(e => e.Id == request.Id && e.IdUsuario == idUsuario);
 
             if (entity == null)
                 throw new NotFoundException(nameof(Pet), request.Id);

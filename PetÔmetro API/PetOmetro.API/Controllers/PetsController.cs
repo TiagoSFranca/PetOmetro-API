@@ -4,6 +4,7 @@ using PetOmetro.Application.Exceptions;
 using PetOmetro.Application.Paginacoes.Models;
 using PetOmetro.Application.Pets.Commands.CreatePet;
 using PetOmetro.Application.Pets.Commands.DeletePet;
+using PetOmetro.Application.Pets.Commands.UpdatePet;
 using PetOmetro.Application.Pets.Models;
 using PetOmetro.Application.Pets.Queries.GetPets;
 using System.Collections.Generic;
@@ -61,6 +62,20 @@ namespace PetOmetro.API.Controllers
             await Mediator.Send(new DeletePetCommand() { Id = id });
 
             return NoContent();
+        }
+
+        [Authorize]
+        [HttpPut("{id}")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(PetViewModel))]
+        [ProducesResponseType((int)HttpStatusCode.NotFound, Type = typeof(ResponseNotFound))]
+        [ProducesResponseType((int)HttpStatusCode.BadRequest, Type = typeof(ResponseBadRequest))]
+        [ProducesResponseType((int)HttpStatusCode.Unauthorized, Type = typeof(ResponseUnauthorized))]
+        [ProducesResponseType((int)HttpStatusCode.InternalServerError, Type = typeof(ResponseInternalServerError))]
+        public async Task<ActionResult<PetViewModel>> Update(int id, [FromForm]UpdatePet model)
+        {
+            var command = Mapper.Map<UpdatePetCommand>(model);
+
+            return Ok(await Mediator.Send(command));
         }
     }
 }
