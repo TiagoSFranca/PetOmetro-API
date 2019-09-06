@@ -12,6 +12,14 @@ namespace PetOmetro.Application.Paginacoes.Models
 
         public int TotalItens { get; set; }
         public ICollection<TModel> Itens { get; set; }
+        public int TotalPaginas
+        {
+            get
+            {
+                int total = TotalItens / ItensPorPagina;
+                return total < 1 ? 1 : total;
+            }
+        }
 
     }
 }
