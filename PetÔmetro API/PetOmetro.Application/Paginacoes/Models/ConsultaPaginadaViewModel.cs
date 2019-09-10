@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace PetOmetro.Application.Paginacoes.Models
 {
@@ -16,7 +17,8 @@ namespace PetOmetro.Application.Paginacoes.Models
         {
             get
             {
-                int total = TotalItens / ItensPorPagina;
+                var valor = Math.Ceiling((double)TotalItens / ItensPorPagina);
+                int total = (int)valor;
                 return total < 1 ? 1 : total;
             }
         }
