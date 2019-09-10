@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PetOmetro.Application.GenerosPet.Models;
+using System;
 
 namespace PetOmetro.Application.Pets.Models
 {
@@ -14,5 +15,7 @@ namespace PetOmetro.Application.Pets.Models
 
         public string Comentario { get; set; }
         public string UrlImagem { get; set; }
+
+        public virtual GeneroPetViewModel GeneroPet { get; set; }
     }
 }
